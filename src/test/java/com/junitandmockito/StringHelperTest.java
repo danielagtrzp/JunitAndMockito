@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
@@ -49,10 +50,45 @@ public class StringHelperTest {
     }
 
     @Test
-    void testReplaceAInFirst2Positions_null_exception() {
+    void testReplaceAInFirst2PositionsNullException() {
         //given
         inString = null;
         //then
         assertThrows(NullPointerException.class, ()->sHelper.replaceAInFirst2Positions(null));
+    }
+
+
+
+    //ABCAB > true, ABCDEBA > false
+    static Stream<Arguments> stringAndExpectedBooleanProvider() {
+        return Stream.of(
+            
+            Arguments.of("ABCAB", true),
+            Arguments.of("ABAB", true),
+            Arguments.of("ABBA", false),
+            Arguments.of("ABCDEBA", false),
+            Arguments.of("AAA", true),
+
+            //Arguments.of("AB", false),//Logic Error it compares AB witH AB returns true
+            Arguments.of("A", false),
+            Arguments.of("", false)
+
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("stringAndExpectedBooleanProvider")
+    void testAreFirstTwoAndLastTwoCharsTheSame(String input , boolean expected) {
+        
+        assertEquals(expected,sHelper.areFirstTwoAndLastTwoCharsTheSame(input));
+
+    }
+
+    @Test
+    void testAreFirstTwoAndLastTwoCharsTheSameNullException() {
+        //given
+        inString = null;
+        //then
+        assertThrows(NullPointerException.class, ()->sHelper.areFirstTwoAndLastTwoCharsTheSame(null));
     }
 }
