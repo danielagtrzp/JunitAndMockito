@@ -2,6 +2,8 @@ package com.junitandmockito;
 
 import java.util.Arrays;
 
+import com.junitandmockito.others.SomeDataService;
+
 //SUT
 public class SomeBusinessService {
 

@@ -1,4 +1,4 @@
-package com.junitandmockito;
+package com.junitandmockito.others;
 
 
 public class SomeDataService {
